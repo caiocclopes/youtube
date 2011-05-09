@@ -1,5 +1,5 @@
-require "rubygems/require"
-require "youtubesocial/model"
+require "rubygems"
+require "youtubesocial/model1"
 module Youtubesocial
   class << self
 

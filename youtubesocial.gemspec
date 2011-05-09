@@ -6,12 +6,15 @@ Gem::Specification.new do |s|
   s.name        = "youtubesocial"
   s.version     = Youtubesocial::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Teste"]
+  s.email       = [" teste@teste.com"]
+  s.homepage    = "http://www.youtube.com"
+  s.summary     = %q{ youtube gem}
+  s.description = %q{ youtube test gem}
 
+  s.add_dependency('mongoid', '2.0.0.rc.6')
+  s.add_dependency('bson_ext', '>=1.2')
+  
   s.rubyforge_project = "youtubesocial"
 
   s.files         = `git ls-files`.split("\n")

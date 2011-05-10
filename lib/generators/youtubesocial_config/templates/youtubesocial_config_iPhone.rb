@@ -35,16 +35,16 @@ class YoutubesocialController < ApplicationController
   def getUrl 
    
      
-     posicao = 0 # starts at the beggining
+     posicao = 0 
      cursor = Youtubesocial.getAll[posicao]
      
-     while cursor != nil # while have entries
+     while cursor != nil # enquanto houver registros
        
-       case cursor.priority.to_i
+       case cursor.priority.to_i #cada prioridade implica uma url...
       
           when 1
            cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.to_s + "&start-index=1&max-results=10&v=2"
-           cursor.save
+           cursor.save #atualiza o campo o url
            
           when 2
             cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2"
@@ -63,7 +63,7 @@ class YoutubesocialController < ApplicationController
     cursor = Youtubesocial.getAll[posicao]
   end
       youtube = Youtubesocial.getAll 
-      render :text => youtube.entries.to_json
+      render :text => youtube.entries.to_json #imrpime os campos, agora com url definido
   end
 
 end

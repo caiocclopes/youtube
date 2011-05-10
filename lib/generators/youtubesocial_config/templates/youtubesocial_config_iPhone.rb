@@ -43,19 +43,19 @@ class YoutubesocialController < ApplicationController
        case cursor.priority.to_i #cada prioridade implica uma url...
       
           when 1
-           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.to_s + "&start-index=1&max-results=10&v=2"
+           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.to_s + "&start-index=1&max-results=10&v=2&alt=json"
            cursor.save #atualiza o campo o url
            
           when 2
-            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2"
+            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2&alt=json"
             cursor.save 
               
           when 3
-            cursor.url = "http://gdata.youtube.com/feeds/api/videos/-/" + cursor.category.to_s + "?v=2"
+            cursor.url = "http://gdata.youtube.com/feeds/api/videos/-/" + cursor.category.to_s + "?v=2&alt=json"
             cursor.save
             
           when 4
-            cursor.url = "http://gdata.youtube.com/feeds/api/standardfeeds/" + cursor.feed_id.to_s  
+            cursor.url = "http://gdata.youtube.com/feeds/api/standardfeeds/" + cursor.feed_id.to_s  + "?v=2&alt=json"
             cursor.save
             
         end

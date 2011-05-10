@@ -5,6 +5,7 @@ module Youtubesocial
       include Mongoid::Document
       field :search_term
       field :account_name
+      field :url
       field :category # Sports, Comedy, Travel....
       field :feed_id  #most_viewed, top_rated, most_recent.....
       field :priority, type: Integer

@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "youtubesocial"
   s.version     = Youtubesocial::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Teste"]
-  s.email       = [" teste@teste.com"]
+  s.authors     = ["Caio Lopes"]
+  s.email       = ["caio.lopes@i.ndigo.com.br"]
   s.homepage    = "http://www.youtube.com"
   s.summary     = %q{ youtube gem}
   s.description = %q{ youtube test gem}

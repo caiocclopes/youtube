@@ -2,9 +2,9 @@ class YoutubesocialController < ApplicationController
 
   def getYoutube
     if (params[:area_id].nil?)
-      youtube = Youtube.getAll
+      youtube = Youtubesocial.getAll
     else
-      youtube = Youtube.getYoutube(params[:area_id].to_i)
+      youtube = Youtubesocial.getYoutube(params[:area_id].to_i)
     end
 
     if (youtube.nil? || youtube.empty?)
@@ -14,7 +14,7 @@ class YoutubesocialController < ApplicationController
     end
   end
 
-  def create #############################ver!!###
+  def create 
     youtubesocial_config = YoutubeModel.new
     youtubesocial_config.account_name = params[:account_name]
     youtubesocial_config.search_term = params[:search_term]
@@ -22,12 +22,48 @@ class YoutubesocialController < ApplicationController
     youtubesocial_config.area_id = params[:area_id].to_i
     youtubesocial_config.category = params[:category]
     youtubesocial_config.feed_id = params[:standard_id]
+    youtubesocial_config.url = params[" "]
 
     if youtube_config.save
       render :text => {:success => true}.to_json
     else
       render :text => {:success => false}.to_json
     end
+  end
+  
+  
+  def getUrl 
+   
+     
+     posicao = 0 # starts at the beggining
+     cursor = Youtubesocial.getAll[posicao]
+     
+     while cursor != nil # while have entries
+       
+       case cursor.priority.to_i
+      
+          when 1
+           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.to_s + "&start-index=1&max-results=10&v=2"
+           cursor.save
+           
+          when 2
+            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2"
+            cursor.save 
+              
+          when 3
+            cursor.url = "http://gdata.youtube.com/feeds/api/videos/-/" + cursor.category.to_s + "?v=2"
+            cursor.save
+            
+          when 4
+            cursor.url = "http://gdata.youtube.com/feeds/api/standardfeeds/" + cursor.feed_id.to_s  
+            cursor.save
+            
+        end
+    posicao += 1 # posicao++
+    cursor = Youtubesocial.getAll[posicao]
+  end
+      youtube = Youtubesocial.getAll 
+      render :text => youtube.entries.to_json
   end
 
 end

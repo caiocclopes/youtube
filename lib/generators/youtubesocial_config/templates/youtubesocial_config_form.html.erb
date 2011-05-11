@@ -1,0 +1,42 @@
+
+  
+  <%= form_for(@youtubesocial_config) do |f| %>
+  <% if @youtubesocial_config.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@youtubesocial_config.errors.count, "error") %> prohibited this youtubesocial_config from being saved:</h2>
+
+      <ul>
+      <% @youtubesocial_config.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :account_name %><br />
+    <%= f.text_field :account_name %>
+  </div>
+  <div class="field">
+    <%= f.label :search_term %><br />
+    <%= f.text_field :search_term %>
+  </div>
+  <div class="field">
+    <%= f.label :area_id %><br />
+    <%= f.text_field :area_id %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.select  :category,([["-","nill"],["All","all"], ["Autos & vehicles","autos&vehicles"],["Comedy","comedy"],["Education","education"],["Entertainment","entertainment"],["Film & Animation","film&animation"],["Gaming","gaming"],["Howto & Style","howto&style"],["Music","music"],["News & Politics","news&politics"],["Nonprofits & Activism","nonprofits&activism"],["People & Blogs","people&blogs"],["Pets & Animals","pets&animals"], ["Science & Technology","science&technology"],["Sports","sports"],["Travel & Events","travel&events"] ]) %>
+  </div>
+  <div class="field">
+    <%= f.label :feed_id %><br />
+    <%= f.select :feed_id,([["Top Rated","top_rated"],["Most Viewed", "most_viewed"],["Top Favorites", "top_favorites"],["Most Popular","most_popular"], ["Most Recent","most_recent"],["Most Discussed","most_discussed"],["Most Responded","most_responded"],["Recently Featured","recently_featured"]]) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

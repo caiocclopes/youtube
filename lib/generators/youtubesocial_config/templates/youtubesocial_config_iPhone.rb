@@ -31,9 +31,36 @@ class YoutubesocialController < ApplicationController
     end
   end
   
-  
+  def setPriority
+     
+     posicao = 0 
+     cursor = Youtubesocial.getAll[posicao]
+      
+      while cursor != nil # enquanto houver registros
+         
+        if !cursor.search_term.eql?("")
+          cursor.priority = 1
+          cursor.save
+        elsif !cursor.account_name.eql?("")
+          cursor.priority = 2
+          cursor.save
+        elsif !cursor.category.eql?("nill")
+          cursor.priority = 3
+          cursor.save
+        else 
+          cursor.priority = 4
+          cursor.save
+        end
+       
+        posicao += 1 # posicao++
+        cursor = Youtubesocial.getAll[posicao]
+  end
+end
+
   def getUrl 
-   
+      
+      setPriority()
+      
      if (params[:area_id].nil?)
        youtube = Youtubesocial.getAll
      else
@@ -48,19 +75,19 @@ class YoutubesocialController < ApplicationController
        case cursor.priority.to_i #cada prioridade implica uma url...
       
           when 1
-           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.to_s + "&start-index=1&max-results=10&v=2&format=5&alt=json"
+           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.sub('+',"%2B").sub(/ /,"+") + "&start-index=1&max-results=10&v=2&format=5"
            cursor.save #atualiza o campo o url
            
           when 2
-            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2&format=5&alt=json"
+            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2&format=5"
             cursor.save 
               
           when 3
-            cursor.url = "http://gdata.youtube.com/feeds/api/videos/-/" + cursor.category.to_s + "?v=2&format=5&alt=json"
+            cursor.url = "http://gdata.youtube.com/feeds/api/videos/-/" + cursor.category.to_s + "?v=2&format=5"
             cursor.save
             
           when 4
-            cursor.url = "http://gdata.youtube.com/feeds/api/standardfeeds/" + cursor.feed_id.to_s  + "?v=2&format=5&alt=json"
+            cursor.url = "http://gdata.youtube.com/feeds/api/standardfeeds/" + cursor.feed_id.to_s  + "?v=2&format=5"
             cursor.save
             
         end

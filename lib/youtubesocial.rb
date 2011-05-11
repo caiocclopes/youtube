@@ -4,12 +4,12 @@ module Youtubesocial
   class << self
 
        def getYoutube(area)
-         if(area.is_a? Numeric)
-           return Youtubesocial::Model::YoutubeModel.where(area_id: area)
-         else
-           return nil
+           if(area.is_a? Numeric)
+             return Youtubesocial::Model::YoutubeModel.where(area_id: area)
+           else
+             return nil
+           end
          end
-       end
 
 
        def getAll

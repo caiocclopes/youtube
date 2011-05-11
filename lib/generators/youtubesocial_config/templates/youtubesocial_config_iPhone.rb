@@ -94,7 +94,7 @@ end
     posicao += 1 # posicao++
     cursor = Youtubesocial.getAll[posicao]
   end
-      youtube = Youtubesocial.getAll 
+   
       render :text => youtube.entries.to_json #imrpime os campos, agora com url definido
   end
 

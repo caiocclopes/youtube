@@ -75,11 +75,11 @@ end
        case cursor.priority.to_i #cada prioridade implica uma url...
       
           when 1
-           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.sub('+',"%2B").sub(/ /,"+") + "&start-index=1&max-results=10&v=2&format=5"
+           cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.gsub('+',"%2B").gsub(/ /,"+") + "&start-index=1&max-results=10&v=2&format=5"
            cursor.save #atualiza o campo o url
            
           when 2
-            cursor.url = "http://gdata.youtube.com/feeds/api/users/" + cursor.account_name.to_s+ "/playlists?v=2&format=5"
+            cursor.url = "http://gdata.youtube.com/feeds/api/videos?v=2&author=" + cursor.account_name.gsub('+',"%2B").gsub(/ /,"+") + "&format=5"
             cursor.save 
               
           when 3

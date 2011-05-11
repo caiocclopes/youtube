@@ -18,5 +18,3 @@ module Youtubesocial
   end
 end
 
-#categories = [["All","all"], ["Autos & vehicles","autos&vehicles"],["Comedy","comedy"],["Education","education"],["Entertainment","entertainment"],["Film & Animation","film&animation"],["Gaming","gaming"],["Howto & Style","howto&style"],["Music","music"],["News & Politics","news&politics"],["Nonprofits & Activism","nonprofits&activism"],["People & Blogs","people&blogs"],["Pets & Animals","pets&animals"], ["Science & Technology","science&technology"],["Sports","sports"],["Travel & Events","travel&events"] ]
-  #feeds = [["Top Rated","top_rated"],["Most Viewed" "most_viewed"],["Top Favorites", "top_favorites"],["Most Popular","most_popular"], ["Most Recent","most_recent"],["Most Discussed","most_discussed"],["Most Responded""most_responded"],["Recently Featured","recently_featured"]]

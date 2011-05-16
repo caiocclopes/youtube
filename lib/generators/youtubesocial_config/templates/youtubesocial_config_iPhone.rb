@@ -31,35 +31,9 @@ class YoutubesocialController < ApplicationController
     end
   end
   
-  def setPriority
-     
-     posicao = 0 
-     cursor = Youtubesocial.getAll[posicao]
-      
-      while cursor != nil # enquanto houver registros
-         
-        if !cursor.search_term.eql?("")
-          cursor.priority = 1
-          cursor.save
-        elsif !cursor.account_name.eql?("")
-          cursor.priority = 2
-          cursor.save
-        elsif !cursor.category.eql?("nill")
-          cursor.priority = 3
-          cursor.save
-        else 
-          cursor.priority = 4
-          cursor.save
-        end
-       
-        posicao += 1 # posicao++
-        cursor = Youtubesocial.getAll[posicao]
-  end
-end
 
   def getUrl 
       
-      setPriority()
       
      if (params[:area_id].nil?)
        youtube = Youtubesocial.getAll
@@ -74,11 +48,11 @@ end
        
        case cursor.priority.to_i #cada prioridade implica uma url...
       
-          when 1
+          when 2
            cursor.url = "http://gdata.youtube.com/feeds/api/videos?q=" + cursor.search_term.gsub('+',"%2B").gsub(/ /,"+") + "&start-index=1&max-results=10&v=2&format=5"
            cursor.save #atualiza o campo o url
            
-          when 2
+          when 1
             cursor.url = "http://gdata.youtube.com/feeds/api/videos?v=2&author=" + cursor.account_name.gsub('+',"%2B").gsub(/ /,"+") + "&format=5"
             cursor.save 
               
@@ -94,6 +68,7 @@ end
     posicao += 1 # posicao++
     cursor = Youtubesocial.getAll[posicao]
   end
+   
       render :text => youtube.entries.to_json #imrpime os campos, agora com url definido
   end
 
